@@ -1,0 +1,5 @@
+﻿@BookStore_HostAddress = http://localhost:5209
+
+GET {{BookStore_HostAddress}}/api/books1
+
+###it 

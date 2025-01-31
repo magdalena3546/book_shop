@@ -1,0 +1,11 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewData["Title"] = "Edytuj książkę";
+}
+
+<h2>Edytuj książkę</h2>
+
+<form asp-action="Edit">
+    @Html.Partial("_BookForm", Model)
+</form>

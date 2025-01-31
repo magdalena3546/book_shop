@@ -1,0 +1,32 @@
+﻿@model BookStore.Models.Order
+
+@{
+    ViewData["Title"] = "Usuń zamówienie";
+}
+
+<h1>Usuń zamówienie</h1>
+
+<h3>Czy na pewno chcesz usunąć to zamówienie?</h3>
+<div>
+    <h4>ID: @Model.Id</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Data zamówienia</dt>
+        <dd class="col-sm-9">@Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</dd>
+
+        <dt class="col-sm-3">Klient</dt>
+        <dd class="col-sm-9">@Model.CustomerName</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.CustomerEmail</dd>
+
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Usuń</button>
+        <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+    </form>
+</div>

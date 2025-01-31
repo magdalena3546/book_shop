@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BookStore.Models.Book>
+
+@{
+    ViewData["Title"] = "Lista książek";
+}
+
+<h1>Lista książek</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj nową książkę</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Gatunek</th>
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Opcje</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Genre</td>
+                <td>
+                    @(book.Description?.Length > 50 ? book.Description.Substring(0, 50) + "..." : book.Description)
+                </td>
+                <td>@book.Price</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-info">📖 Szczegóły</a>
+                    <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-warning">✏️ Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger">🗑 Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

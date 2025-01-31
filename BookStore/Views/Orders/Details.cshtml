@@ -1,0 +1,56 @@
+﻿@model BookStore.Models.Order
+
+@{
+    ViewData["Title"] = "Szczegóły zamówienia";
+}
+
+<h1>Szczegóły zamówienia</h1>
+
+<div>
+    <h4>Zamówienie ID: @Model.Id</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Data zamówienia</dt>
+        <dd class="col-sm-9">@Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</dd>
+
+        <dt class="col-sm-3">Klient</dt>
+        <dd class="col-sm-9">@Model.CustomerName</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.CustomerEmail</dd>
+
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+
+        <p><strong>Liczba książek w zamówieniu:</strong> @Model.OrderDetails.Count()</p>
+    </dl>
+
+    <h5>Szczegóły zamówienia:</h5>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Tytuł książki</th>
+                <th>Ilość</th>
+                <th>Cena jednostkowa</th>
+                <th>Łączna cena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.OrderDetails)
+            {
+            <tr>
+                <td>@detail.Book.Title</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.UnitPrice.ToString("C")</td>
+                <td>@(detail.Quantity * detail.UnitPrice)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <h5>Podsumowanie:</h5>
+    <p><strong>Łączna wartość zamówienia:</strong> @Model.OrderDetails.Sum(d => d.Quantity * d.UnitPrice)</p>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edytuj</a>
+    <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+</div>

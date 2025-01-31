@@ -1,0 +1,51 @@
+﻿@model BookStore.Models.Order
+
+@{
+    ViewData["Title"] = "Edytuj zamówienie";
+}
+
+<h1>Edytuj zamówienie</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="CustomerName" class="control-label"></label>
+        <input asp-for="CustomerName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CustomerEmail" class="control-label"></label>
+        <input asp-for="CustomerEmail" class="form-control" type="email" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status" class="control-label"></label>
+        <select asp-for="Status" class="form-control">
+            <option value="Pending">Oczekujące</option>
+            <option value="Completed">Zakończone</option>
+            <option value="Canceled">Anulowane</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Wybierz książkę:</label>
+        <select name="selectedBook" class="form-control" required>
+            @foreach (var book in ViewBag.Books)
+            {
+                var isSelected = Model.OrderDetails.FirstOrDefault()?.BookId == book.Id;
+            <option value="@book.Id" selected="@(isSelected ? "selected" : null)">
+                @book.Title - @book.Price zł
+            </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Podaj ilość:</label>
+        <input type="number" name="quantity" class="form-control" min="1" value="@Model.OrderDetails.FirstOrDefault()?.Quantity" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+</form>
