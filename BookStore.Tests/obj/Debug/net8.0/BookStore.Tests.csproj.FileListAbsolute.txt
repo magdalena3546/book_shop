@@ -361,3 +361,4 @@ C:\Users\Magda\Desktop\studia\asp.net\book_shop\BookStore.Tests\obj\Debug\net8.0
 C:\Users\Magda\Desktop\studia\asp.net\book_shop\BookStore.Tests\obj\Debug\net8.0\BookStore.Tests.pdb
 C:\Users\Magda\Desktop\studia\asp.net\book_shop\BookStore.Tests\obj\Debug\net8.0\BookStore.Tests.genruntimeconfig.cache
 C:\Users\Magda\Desktop\studia\asp.net\book_shop\BookStore.Tests\obj\Debug\net8.0\ref\BookStore.Tests.dll
+C:\Users\Magda\Desktop\studia\asp.net\book_shop\BookStore.Tests\obj\Debug\net8.0\BookStore.Tests.sourcelink.json

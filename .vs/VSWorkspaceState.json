@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\BookStore",
-    "\\BookStore\\Controllers",
-    "\\BookStore\\Models",
+    "\\BookStore.Tests",
+    "\\BookStore\\Middleware",
     "\\BookStore\\Views",
     "\\BookStore\\Views\\Account",
     "\\BookStore\\Views\\Books",
@@ -11,6 +11,6 @@
     "\\BookStore\\Views\\Home",
     "\\BookStore\\Views\\Orders"
   ],
-  "SelectedNode": "\\BookStore.Tests",
+  "SelectedNode": "\\BookStore.Tests\\OrderTests.cs",
   "PreviewInSolutionExplorer": false
 }

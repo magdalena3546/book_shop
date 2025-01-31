@@ -43,7 +43,8 @@
 
     <div class="form-group">
         <label>Podaj ilość:</label>
-        <input type="number" name="quantity" class="form-control" min="1" value="@Model.OrderDetails.FirstOrDefault()?.Quantity" required />
+        <input type="number" name="quantity" class="form-control" min="1"
+               value="@Model.OrderDetails.FirstOrDefault()?.Quantity" required />
     </div>
 
     <button type="submit" class="btn btn-primary">Zapisz</button>

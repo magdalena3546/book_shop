@@ -98,11 +98,11 @@ namespace BookStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerName,CustomerEmail,Status")] Order order, int[]? selectedBooks, int[]? quantities)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerName,CustomerEmail,Status")] Order order, int selectedBook, int quantity)
         {
             if (id != order.Id) return NotFound();
 
-            if (!ModelState.IsValid || selectedBooks == null || quantities == null)
+            if (!ModelState.IsValid)
             {
                 ViewBag.Books = _context.Books.ToList();
                 return View(order);
@@ -123,20 +123,20 @@ namespace BookStore.Controllers
                 _context.OrderDetails.RemoveRange(existingOrder.OrderDetails);
                 await _context.SaveChangesAsync();
 
-                for (int i = 0; i < selectedBooks.Length; i++)
+                
+                var book = await _context.Books.FindAsync(selectedBook);
+                if (book != null)
                 {
-                    var book = await _context.Books.FindAsync(selectedBooks[i]);
-                    if (book != null)
+                    var newOrderDetail = new OrderDetail
                     {
-                        _context.OrderDetails.Add(new OrderDetail
-                        {
-                            OrderId = order.Id,
-                            BookId = book.Id,
-                            Quantity = quantities[i],
-                            UnitPrice = book.Price
-                        });
-                    }
+                        OrderId = order.Id,
+                        BookId = book.Id,
+                        Quantity = quantity,
+                        UnitPrice = book.Price
+                    };
+                    _context.OrderDetails.Add(newOrderDetail);
                 }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -147,6 +147,7 @@ namespace BookStore.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
 
         public async Task<IActionResult> Delete(int? id)
         {
